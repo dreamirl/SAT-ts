@@ -433,9 +433,19 @@ export function testPolygonCircle(
       }
       // Otherwise, it's the middle region:
     } else {
+      //To check if the polygon is clockwise, we get the cross product
+      let nextId = (next + 1) % polygon['points'].length;
+      let cross = edge.cross(new Vector(
+        polygon['points'][nextId].x - polygon['points'][i].x,
+        polygon['points'][nextId].y - polygon['points'][i].y))
       // Need to check if the circle is intersecting the edge,
       // Change the edge into its "edge normal".
       var normal = edge.perp().normalize();
+      //If it's clockwise, we inverse the normal
+      if (cross < 0
+      ) {
+        normal.reverse();
+      }
       // Find the perpendicular distance between the center of the
       // circle and the edge.
       var dist = point.dot(normal);
