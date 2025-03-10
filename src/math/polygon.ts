@@ -18,10 +18,11 @@
    * @constructor
    */
 
-   import Vector from './vector';
    import Box from './box';
+import Vector from './vector';
 
    export default class Polygon{
+       type: 'polygon' = 'polygon';
        pos: Vector;
 
        angle: number;
@@ -297,4 +298,8 @@
             return new Vector(cx, cy);
         };
 
+        // dummy function to allow use of any SAT Types easily
+        toPolygon(): Polygon {
+            return this;
+        }
    };
